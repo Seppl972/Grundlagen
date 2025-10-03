@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,56 +19,27 @@ namespace Taschenrechner
     /// Partielle Klasse wird auch in anderen Dokument definiert (Verbindung zu XAML)
     public partial class MainWindow : Window
     {
-
-        private int mathCounter;
+        private static int mathOperator;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        Button[] buttonArray = new Button[14];
-        public static int[] Zwischenergebnis = new int[2];
         public static double[] zahlenEingegeben = new double[2];
-
-        Button one = new Button();
-        Button two = new Button();
-        Button three = new Button();
-        Button four = new Button();
-        Button five = new Button();
-        Button six = new Button();
-        Button seven = new Button();
-        Button eight = new Button();
-        Button nine = new Button();
-        Button addition = new Button();
-        Button subtraction = new Button();
-        Button multiplication = new Button();
-        Button division = new Button();
-        Button equals = new Button();
-
-        public void createButton()
-        {
-            buttonArray[0] = one;
-            buttonArray[1] = two;
-            buttonArray[2] = three;
-            buttonArray[3] = four;
-            buttonArray[4] = five;
-            buttonArray[5] = six;
-            buttonArray[6] = seven;
-            buttonArray[7] = eight;
-            buttonArray[8] = nine;
-            buttonArray[9] = addition;
-            buttonArray[10] = subtraction;
-            buttonArray[11] = multiplication;
-            buttonArray[12] = division;
-            buttonArray[13] = equals;
-        }
 
         public void berechneErgebnis()
         {
-            string ZwischenergebnisA_String = Ergebnis.Text;
-            double ZwischenergebnisA_Double = double.Parse(ZwischenergebnisA_String);
-            zahlenEingegeben[0] = ZwischenergebnisA_Double;
+            if (double.TryParse(Ergebnis.Text, out double ersteZahl))
+            {
+                zahlenEingegeben[0] = ersteZahl;
+                Ergebnis.Text = ""; // Leeren für die zweite Zahl
+            }
+            else
+            {
+                // Optional: Fehlermeldung
+                MessageBox.Show("Ungültige Eingabe für die erste Zahl");
+            }
         }
 
         private void button_Close(object sender, RoutedEventArgs e)
@@ -126,35 +99,36 @@ namespace Taschenrechner
 
         public void button_Addition(object sender, RoutedEventArgs e)
         {
+            mathOperator = 1;
             berechneErgebnis();
-            mathCounter = 1;
-            this.Ergebnis.Text += "+";
         }
 
-        // man muss noch Umweg +/- Button gehen, sonst Fehler 
         public void button_Subtraction(object sender, RoutedEventArgs e)
         {
-            berechneErgebnis(); 
-            this.Ergebnis.Text += "-"; 
-            mathCounter = 2;
+            mathOperator = 2;
+            berechneErgebnis();
         }
 
         private void button_Multiplication(object sender, RoutedEventArgs e)
         {
+            mathOperator = 3;
             berechneErgebnis();
-            mathCounter = 3;
-            this.Ergebnis.Text += "*";
         }
         public void button_Division(object sender, RoutedEventArgs e)
         {
+            mathOperator = 4;
             berechneErgebnis();
-            mathCounter = 4;
-            this.Ergebnis.Text += "/";
         }
-        
-        public void button_Comma(object sender, RoutedEventArgs e)
+
+        public void button_Point(object sender, RoutedEventArgs e)
         {
-            this.Ergebnis.Text += ",";
+            this.Ergebnis.Text += ".";
+        }
+
+        public void button_Reframe(object sender, RoutedEventArgs e)
+        {
+            double NumberReframe = double.Parse(this.Ergebnis.Text) * -1;
+            this.Ergebnis.Text = NumberReframe.ToString();
         }
 
         public void button_AllClear(object sender, RoutedEventArgs e)
@@ -164,40 +138,46 @@ namespace Taschenrechner
 
         public void button_Equals(object sender, RoutedEventArgs e)
         {
-            String ZwischenergebnisB_String = this.Ergebnis.Text;
-            String StringNew = ZwischenergebnisB_String.Substring(1);
-            double ZwischenergebnisB_double = Int32.Parse(StringNew);
+            if (!double.TryParse(Ergebnis.Text, out double zweiteZahl))
+            {
+                Ergebnis.Text = "Ungültige Eingabe";
+                return;
+            }
 
-            zahlenEingegeben[1] = ZwischenergebnisB_double;
+            zahlenEingegeben[1] = zweiteZahl;
 
-            switch (mathCounter)
+            double result = 0;
+
+            switch (mathOperator)
             {
                 case 1:
-                    Double ErgebnisAdditon = zahlenEingegeben[0] + zahlenEingegeben[1];
-                    this.Ergebnis.Text = String.Concat(ErgebnisAdditon);
+                    result = zahlenEingegeben[0] + zahlenEingegeben[1];
                     break;
                 case 2:
-                    Double ErgebnisSubtraction = zahlenEingegeben[0] - zahlenEingegeben[1];
-                    this.Ergebnis.Text = String.Concat(ErgebnisSubtraction);
+                    result = zahlenEingegeben[0] - zahlenEingegeben[1];
                     break;
                 case 3:
-                    Double ErgebnisMultiplication = zahlenEingegeben[0] * zahlenEingegeben[1];
-                    this.Ergebnis.Text = String.Concat(ErgebnisMultiplication);
+                    result = zahlenEingegeben[0] * zahlenEingegeben[1];
                     break;
                 case 4:
-                    Double ErgebnisDivision = zahlenEingegeben[0] / zahlenEingegeben[1];
-                    this.Ergebnis.Text = String.Concat(ErgebnisDivision);
+                    if (zahlenEingegeben[1] == 0)
+                    {
+                        Ergebnis.Text = "Fehler: /0";
+                        return;
+                    }
+                    result = zahlenEingegeben[0] / zahlenEingegeben[1];
                     break;
                 default:
-                    this.Ergebnis.Text = "Empty";
-                    break;
+                    Ergebnis.Text = "Kein Operator";
+                    return;
             }
+
+            Ergebnis.Text = result.ToString();
         }
 
-        public void button_Reframe(object sender, RoutedEventArgs e)
+        // CSV-Export
+        private void Button_Export(object sender, RoutedEventArgs e)
         {
-            double NumberReframe = double.Parse(this.Ergebnis.Text) * -1;
-            this.Ergebnis.Text = NumberReframe.ToString();
 
         }
 
