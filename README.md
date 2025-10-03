@@ -27,13 +27,18 @@ Welcome to my small WPF project! This C# application is a simple calculator that
 
 * Fundamentals of object-oriented programming (OOP)
 * GUI design with WPF/XAML (e.g., buttons, textbox, grid)
-
   > done
+* 
 * Event handling for user actions (e.g., button clicks)
-
+  > done
+*
+* Exception handling for user mistakes
+  > planned
+* 
+* Exporting Results to a CSV File
   > in progress
+*
 * Considering MVVM architecture for better code structure
-
   > planned
 
 ## 📦 How to Run
