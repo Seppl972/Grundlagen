@@ -175,10 +175,27 @@ namespace Taschenrechner
             Ergebnis.Text = result.ToString();
         }
 
+        
+        public void toCSVfile()
+        {
+            String folderPath = "C:\\Users\\sebas\\OneDrive\\Desktop\\Coding\\C#\\Taschenrechner";
+            String filePath = System.IO.Path.Combine(folderPath, "export.csv");  // Kombiniert Ordner + Dateiname
+
+            try
+            {
+                File.WriteAllText(filePath, Ergebnis.Text);
+                MessageBox.Show("Export erfolgreich!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler: {ex.Message}");
+            }
+        }
+
         // CSV-Export
         private void Button_Export(object sender, RoutedEventArgs e)
         {
-
+            toCSVfile();
         }
 
     }
