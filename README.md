@@ -1,44 +1,43 @@
-﻿# Calculator – C# WPF Project
+﻿# Rechner – C# WPF Projekt
 
-Welcome to my small WPF project! This C# application is a simple calculator that performs basic arithmetic operations. It serves as a practical exercise project for learning C#, WPF, and applying programming concepts.
+Willkommen zu meinem ersten kleinen WPF-Projekt! Diese C#-Anwendung ist ein einfacher Rechner, der grundlegende Rechenoperationen durchführt. 
+Sie dient als praktisches Übungsprojekt zum Lernen von C#, WPF und zur Anwendung von Programmierkonzepten.
 
-## 🚀 Project Goals
+## 🚀 Projektziele
 
-* Apply basic C# concepts in a small real-world project
-* Learn GUI development with **Windows Presentation Foundation (WPF)**
-* Structure code using simple OOP principles
-* Gain first experience with XAML for UI design
+* Grundlegende C#-Konzepte in einem kleinen, praxisnahen Projekt anwenden
+* GUI-Entwicklung mit **Windows Presentation Foundation (WPF)** lernen
+* Code mithilfe einfacher OOP-Prinzipien strukturieren
+* Erste Erfahrungen mit XAML für die Gestaltung der Benutzeroberfläche sammeln
 
-## 🛠️ Features
+## 🛠️ Funktionen
 
-* Basic arithmetic operations: addition, subtraction, multiplication, division
-* User interface with buttons, textbox, and grid layout
-* Error handling for division by zero
-* Simple and clean GUI
+* Grundlegende Rechenoperationen: Addition, Subtraktion, Multiplikation, Division
+* Benutzeroberfläche mit Buttons, Textfeld und Grid-Layout
+* Fehlerbehandlung bei Division durch Null
+* Einfache und übersichtliche GUI
 
-## 📚 Technologies Used
+## 📚 Verwendete Technologien
 
-* C# (.NET 8.0)
-* WPF (XAML) for the user interface
+* C# (.NET 10.0)
+* WPF (XAML) für die Benutzeroberfläche
 * Visual Studio
-* Git for version control
+* Git für Versionskontrolle
 
-## 💡 Concepts Learned in Practice
+## 💡 In der Praxis gelernte Konzepte
 
-| Concept                                              | Status        |
-|------------------------------------------------------|---------------|
-| Fundamentals of object-oriented programming (OOP)    | ✅ done       |
-| GUI design with WPF/XAML (e.g., buttons, textbox)    | ✅ done       |
-| Event handling for user actions (e.g., button clicks)| ✅ done       |
-| Exporting Results to a CSV File                      | 🚧 in progress|
-| Exception handling for user mistakes                 | ⏳ planned     |
-| Considering MVVM architecture                        | ⏳ planned     |
+| Konzept                                                  | Status     |
+| -------------------------------------------------------- | ---------- |
+| Grundlagen der objektorientierten Programmierung (OOP)   | ✅ erledigt |
+| GUI-Design mit WPF/XAML (z.B. Buttons, Textfeld)         | ✅ erledigt |
+| Event-Handling für Benutzeraktionen (z.B. Button-Klicks) | ✅ erledigt |
+| Ergebnisse in eine CSV-Datei exportieren                 | ✅ erledigt |
+| Ausnahmebehandlung für Benutzereingaben                  | ⏳ geplant  |
 
+## 📦 So läuft es
 
-## 📦 How to Run
-
-1. Clone the repository
-2. Open the project in Visual Studio
-3. Start with `F5`
+1. Repository klonen
+2. Projekt in Visual Studio öffnen
+3. Mit `F5` starten
 
 ---
